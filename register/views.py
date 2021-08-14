@@ -26,11 +26,7 @@ class RegisterDetail(APIView):
     def post(self, request):
         user = get_user(request) #jwt에서 user읽기
         #print(user)
-        #body=request.data
-        body_unicode = request.body.decode('utf-8')
-        body = json.loads(body_unicode)
-        body = body['content']
-        print(body)
+        body=request.data
 
         if body["type"]=="gym":
             user.type="gym"

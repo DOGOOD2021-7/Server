@@ -58,7 +58,7 @@ class CustomUser(AbstractUser):
 
 
 class Dieter(models.Model):
-    username = models.CharField(max_length=10)
+    username = models.CharField(max_length=10) #TODO 지워야됨
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     profile = models.TextField()
     address = models.TextField()
