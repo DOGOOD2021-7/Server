@@ -75,9 +75,10 @@ class ReservationsDetail(APIView):
             reservation.reason = reason
 
             date = reservation.reserved_date.date()
-            print(reservation.reserved_date)
             time = reservation.reserved_date.time().hour
-            print(date, time)
+            time = time+9
+            if time >=24:
+                time - 24
             availableTime = gym.availableTimes.get(time=time, date=date)
             availableTime.taken = False
             availableTime.save()
