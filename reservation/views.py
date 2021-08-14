@@ -6,6 +6,7 @@ from .serializers import *
 from .models import *
 from register.views import *
 from register.models import *
+from gym.models import *
 import json
 import datetime
 
@@ -38,10 +39,23 @@ class AddReservation(APIView):
 
         dieter = get_user(request).dieter
         date_time = json.loads(request.body.decode('utf-8')).get('datetime')
+
+        date = date_time.split()[0]
+        time = int(date_time.split()[1][:2])
+
+        date = datetime.datetime.strptime(date, '%Y-%m-%d')
+
         date_time = datetime.datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S.%f')
         client_name = json.loads(request.body.decode('utf-8')).get('client_name')
         phone_num = json.loads(request.body.decode('utf-8')).get('phone_num')
+
+
         msg = {"detail": "success"}
+
+
+        availableTime = gym.availableTimes.get(time = time, date = date)
+        availableTime.taken = True
+        availableTime.save()
 
         Reservation.objects.create(gym=gym, reserved_date=date_time, client_name=client_name,phone_num=phone_num,dieter=dieter)
 
@@ -56,8 +70,19 @@ class ReservationsDetail(APIView):
         reason = json.loads(request.body.decode('utf-8')).get('reason')
         msg = {"detail" : "success"}
 
+
         if state == 'rejection':
             reservation.reason = reason
+
+            date = reservation.reserved_date.date()
+            print(reservation.reserved_date)
+            time = reservation.reserved_date.time().hour
+            print(date, time)
+            availableTime = gym.availableTimes.get(time=time, date=date)
+            availableTime.taken = False
+            availableTime.save()
+
+
         else:
             Coaching.objects.create(gym=gym, client= reservation.dieter, client_name=reservation.client_name )
 
