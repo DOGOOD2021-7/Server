@@ -12,6 +12,9 @@ class Gym(models.Model):
     profile3 = models.ImageField()
 
 
+class Dieter(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.TextField()
 
 
 
