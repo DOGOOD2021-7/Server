@@ -11,6 +11,8 @@ class Reservation(models.Model):
     state = models.CharField(choices=STATE_CHOICES, max_length=100)
     reason = models.TextField(null=True, blank=True)
     reserved_date = models.DateTimeField()
+    phone_num = models.TextField()
+    client_name = models.CharField(max_length=10)
     gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
     dieter = models.ForeignKey(Dieter, on_delete=models.CASCADE)
 
