@@ -18,6 +18,7 @@ class AvailableDateTime:
         (20, '20 : 00'),
         (21, '21 : 00'),
     )
-    gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
+    gym = models.ForeignKey(Gym, on_delete=models.CASCADE, related_name='availableTimes')
     date = models.DateField()
     time = models.IntegerField(choices=Time_CHOICES)
+    taken = models.IntegerField()
