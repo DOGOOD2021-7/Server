@@ -63,6 +63,9 @@ class Dieter(models.Model):
     profile = models.TextField()
     address = models.TextField()
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 class Gym(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
@@ -77,6 +80,8 @@ class Gym(models.Model):
     clients = models.ManyToManyField(Dieter,related_name='coaches', blank=True, null=True)
     price_desc = models.TextField()
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Coaching(models.Model):
     gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
