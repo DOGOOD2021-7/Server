@@ -16,3 +16,8 @@ class DieterAdmin(admin.ModelAdmin):
 class GymAdmin(admin.ModelAdmin):
     list_display = ('user','gym_name','address',)
     list_display_links = ('user','gym_name','address',)
+
+@admin.register(Coaching)
+class CoachAdmin(admin.ModelAdmin):
+    list_display = ('gym', 'client', 'client_name')
+    list_display_links = ('gym', 'client', 'client_name')

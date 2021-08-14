@@ -14,5 +14,5 @@ class ClientRecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Record
-        field = '__all__'
+        fields = '__all__'
 
