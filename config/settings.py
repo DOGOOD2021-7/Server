@@ -76,12 +76,14 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7), 
     'JWT_ALLOW_REFRESH': True, 
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),
+    'JWT_RESPONSE_PAYLOAD_HANDLER':'register.views.jwt_response_payload_handler',
 }
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-    )
+    ),
 }
 
 MIDDLEWARE = [

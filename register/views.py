@@ -8,6 +8,11 @@ def get_user(request):
     decoded = jwt.decode(token, '@v^+tcurenaeo=u0cuorgi0(8*9xalx7g2sz0np^u7j6@o&q_c')
     return CustomUser.objects.get(id=decoded['user_id'])
 
+def jwt_response_payload_handler(token, user=None, request=None):
+    return {
+        'token': token,
+        'user': user.type
+    }
 
 # User의 세부정보받기
 class RegisterDetail(APIView):
