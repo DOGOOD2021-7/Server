@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import *
 from .models import *
+from register.views import get_user
 
 
 
@@ -13,8 +14,13 @@ class GymList(APIView):
     def get(self, request):
         gyms = Gym.objects.all()
         serializer = GymSerializer(gyms ,many=True, context={"request": request})
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        user = get_user(request)
+        if user.type == "gym":
+            user_address = user.gym.address
+        else:
+            user_address = user.dieter.address
+        return_dict = {'user_address':user_address, 'data': serializer.data}
+        return Response(return_dict, status=status.HTTP_200_OK)
 
 
 class GymDetail(APIView):
