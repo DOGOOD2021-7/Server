@@ -31,10 +31,10 @@ class AddReservation(APIView):
 
     def post(self, request, pk):
         gym = get_object_or_404(Gym, pk=pk)
-        if get_user(request).type is 'gym':
+        if get_user(request).type == 'gym':
             msg = {"detail": "gym can not access"}
             return Response(data=msg, status=status.HTTP_400_BAD_REQUEST)
-        
+
         dieter = get_user(request).dieter
         date_time = json.loads(request.body.decode('utf-8')).get('datetime')
         date_time = datetime.datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S.%f')
