@@ -9,15 +9,15 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 @admin.register(Dieter)
 class DieterAdmin(admin.ModelAdmin):
-    list_display = ('user','profile','address',)
-    list_display_links = ('user','profile','address',)
+    list_display = ('id','user','profile','address',)
+    list_display_links = ('id','user','profile','address',)
 
 @admin.register(Gym)
 class GymAdmin(admin.ModelAdmin):
-    list_display = ('user','gym_name','address',)
-    list_display_links = ('user','gym_name','address',)
+    list_display = ('id','user','gym_name','address',)
+    list_display_links = ('id','user','gym_name','address',)
 
 @admin.register(Coaching)
 class CoachAdmin(admin.ModelAdmin):
-    list_display = ('gym', 'client', 'client_name')
-    list_display_links = ('gym', 'client', 'client_name')
+    list_display = ('id','gym', 'client', 'client_name')
+    list_display_links = ('id','gym', 'client', 'client_name')
