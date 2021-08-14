@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import *
+from register.models import *
 
 
 class AvailableDateTime:
