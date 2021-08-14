@@ -73,7 +73,7 @@ class Gym(models.Model):
     profile1 = models.TextField()
     profile2 = models.TextField()
     profile3 = models.TextField()
-    clients = models.ManyToManyField(Dieter,related_name='coaches', through='Coaching')
+    clients = models.ManyToManyField(Dieter,related_name='coaches')
     price_desc = models.TextField()
 
 
