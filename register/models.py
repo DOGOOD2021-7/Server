@@ -59,7 +59,7 @@ class CustomUser(AbstractUser):
 class Dieter(models.Model):
     username = models.CharField(max_length=10)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    profile = models.ImageField()
+    profile = models.TextField()
     address = models.TextField()
 
 
@@ -67,9 +67,10 @@ class Gym(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     gym_name = models.CharField(max_length=100)
     address = models.TextField()
-    logo = models.ImageField()
+    logo = models.TextField()
     website = models.URLField()
-    profile1 = models.ImageField()
-    profile2 = models.ImageField()
-    profile3 = models.ImageField()
+    profile1 = models.TextField()
+    profile2 = models.TextField()
+    profile3 = models.TextField()
     clients = models.ManyToManyField(Dieter,related_name='coaches')
+    price_desc = models.TextField()
