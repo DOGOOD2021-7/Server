@@ -8,7 +8,7 @@ class Reservation(models.Model):
         ('confirmed', '예약확정'),
         ('rejection', '예약취소')
     )
-    state = models.CharField(choices=STATE_CHOICES, max_length=100)
+    state = models.CharField(choices=STATE_CHOICES, max_length=100, default='inquiry')
     reason = models.TextField(null=True, blank=True)
     reserved_date = models.DateTimeField()
     phone_num = models.TextField()
