@@ -65,7 +65,7 @@ class Dieter(models.Model):
 
 
 class Gym(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     gym_name = models.CharField(max_length=100)
     address = models.TextField()
     logo = models.TextField()
@@ -73,7 +73,7 @@ class Gym(models.Model):
     profile1 = models.TextField()
     profile2 = models.TextField()
     profile3 = models.TextField()
-    clients = models.ManyToManyField(Dieter,related_name='coaches')
+    clients = models.ManyToManyField(Dieter,related_name='coaches', blank=True, null=True)
     price_desc = models.TextField()
 
 
