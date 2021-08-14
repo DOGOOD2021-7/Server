@@ -20,4 +20,4 @@ class AvailableDateTime:
     )
     gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
     date = models.DateField()
-    time = models.ImageField(choices=Time_CHOICES)
+    time = models.IntegerField(choices=Time_CHOICES)
