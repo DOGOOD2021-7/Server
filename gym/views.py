@@ -36,10 +36,9 @@ class ReservationTimeDetail(APIView):
 
     def get(self, request, pk):
         gym = get_object_or_404(Gym, pk=pk)
-        date = request.query_params['date'] # requset parameter 가져오기
-
-        gym.availableTimes.filter(date = date)
-        times = AvailableDateTime.filter(date = date, gym=gym)
+        date = request.query_params['date'] # request parameter 가져오기
+        
+        times = gym.availableTimes.filter(date = date)
         serializer = AvailableDateTimeSerializer(times, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
