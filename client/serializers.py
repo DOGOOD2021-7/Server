@@ -5,10 +5,14 @@ from record.models import *
 
 
 class ClientSerializer(serializers.ModelSerializer):
-
+    profile = serializers.SerializerMethodField('get_profile')  # client의 profile가져오기
+    
     class Meta:
         model = Coaching
-        fields = ('id', 'client','client_name' )
+        fields = ('id', 'client','client_name','profile')
+
+    def get_profile(self, obj):  # client의 profile가져오기
+        return obj.client.profile
 
 class ClientRecordSerializer(serializers.ModelSerializer):
 
