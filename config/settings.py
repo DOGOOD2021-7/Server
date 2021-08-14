@@ -25,7 +25,7 @@ SECRET_KEY = '@v^+tcurenaeo=u0cuorgi0(8*9xalx7g2sz0np^u7j6@o&q_c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -68,6 +68,12 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 SITE_ID = 1
 
 REST_USE_JWT = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
