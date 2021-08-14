@@ -6,6 +6,7 @@ from .serializers import *
 from .models import *
 from register.views import *
 import json
+import datetime
 
 
 
@@ -22,20 +23,24 @@ class ReservationList(APIView):
             reservations = user.gym.reservation_set.all()
             serializer = GymReservationSerializer ( reservations, many=True, context={"request": request})
 
+
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class AddReservation(APIView):
 
     def post(self, request, pk):
         gym = get_object_or_404(Gym, pk=pk)
-        dieter = get_user(request)
-        datetime = json.loads(request.body.decode('utf-8')).get('datetime')
+        dieter = get_user(request).dieter
+        date_time = json.loads(request.body.decode('utf-8')).get('datetime')
+        date_time = datetime.datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S.%f')
         client_name = json.loads(request.body.decode('utf-8')).get('client_name')
         phone_num = json.loads(request.body.decode('utf-8')).get('phone_num')
+        msg = {"detail": "success"}
 
-        Reservation.objects.create(gym=gym, datetime=datetime, client_name=client_name,phone_num=phone_num,dieter=dieter)
+        Reservation.objects.create(gym=gym, reserved_date=date_time, client_name=client_name,phone_num=phone_num,dieter=dieter)
 
-        return Response(status=status.HTTP_201_CREATED)
+        return Response(data=msg, status=status.HTTP_201_CREATED)
     
 class ReservationsDetail(APIView):
 
@@ -43,11 +48,12 @@ class ReservationsDetail(APIView):
         reservation = get_object_or_404(Reservation, pk=pk)
         state = reservation.state = json.loads(request.body.decode('utf-8')).get('state')
         reason = reservation.state = json.loads(request.body.decode('utf-8')).get('reason')
+        msg = {"detail" : "success"}
 
         if state == 'rejection':
             reservation.reason = reason
         reservation.state =state
         reservation.save()
 
-        return Response(status=status.HTTP_200_OK)
+        return Response(data=msg, status=status.HTTP_200_OK)
 

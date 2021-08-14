@@ -14,7 +14,7 @@ class GymReservationSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance): #shop에서 필요한 정보만 표시
         response = super().to_representation(instance)
-        response['gym'] = ReservationGymSerializer(instance.shop, context={"request": self.context['request']}).data
+        response['gym'] = ReservationGymSerializer(instance.gym, context={"request": self.context['request']}).data
         return response
 
 class DieterReservationSerializer(serializers.ModelSerializer):
@@ -24,5 +24,5 @@ class DieterReservationSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance): #shop에서 필요한 정보만 표시
         response = super().to_representation(instance)
-        response['gym'] = ReservationGymSerializer(instance.shop, context={"request": self.context['request']}).data
+        response['gym'] = ReservationGymSerializer(instance.gym, context={"request": self.context['request']}).data
         return response
