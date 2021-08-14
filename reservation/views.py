@@ -42,6 +42,10 @@ class ReservationsDetail(APIView):
     def patch(self,request,pk):
         reservation = get_object_or_404(Reservation, pk=pk)
         state = reservation.state = json.loads(request.body.decode('utf-8')).get('state')
+        reason = reservation.state = json.loads(request.body.decode('utf-8')).get('reason')
+
+        if state == 'rejection':
+            reservation.reason = reason
         reservation.state =state
         reservation.save()
 
