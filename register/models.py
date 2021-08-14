@@ -55,6 +55,13 @@ class CustomUser(AbstractUser):
         return self.email
 
 
+
+class Dieter(models.Model):
+    username = models.CharField(max_length=10)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    address = models.TextField()
+
+
 class Gym(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     gym_name = models.CharField(max_length=100)
@@ -64,9 +71,4 @@ class Gym(models.Model):
     profile1 = models.ImageField()
     profile2 = models.ImageField()
     profile3 = models.ImageField()
-
-
-class Dieter(models.Model):
-    username = models.CharField(max_length=10)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    address = models.TextField()
+    clients = models.ManyToManyField(Dieter,related_name='coaches')
