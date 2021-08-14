@@ -21,6 +21,7 @@ class RegisterDetail(APIView):
             Gym.objects.create(
                 user=user,
                 address=body["address"],
+                address_detail=body["address_detail"],
                 logo=body["logo"],
                 website=body["website"],
                 profile1=body["profile1"],

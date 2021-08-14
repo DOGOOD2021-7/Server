@@ -68,6 +68,7 @@ class Gym(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     gym_name = models.CharField(max_length=100)
     address = models.TextField()
+    address_detail = models.TextField()
     logo = models.TextField()
     website = models.URLField()
     profile1 = models.TextField()
