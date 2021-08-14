@@ -19,10 +19,10 @@ class ReservationList(APIView):
         type = request.query_params['type']
         user = get_user(request)
         if type == 'dieter':
-            reservations = user.dieter.reservation_set.all()
+            reservations = user.dieter.reservation_set.all().order_by('-pk')
             serializer = DieterReservationSerializer ( reservations, many=True, context={"request": request})
         else:
-            reservations = user.gym.reservation_set.all()
+            reservations = user.gym.reservation_set.all().order_by('-pk')
             serializer = GymReservationSerializer ( reservations, many=True, context={"request": request})
 
 
