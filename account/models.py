@@ -13,6 +13,7 @@ class Gym(models.Model):
 
 
 class Dieter(models.Model):
+    username = models.CharField(max_length=10)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     address = models.TextField()
 
