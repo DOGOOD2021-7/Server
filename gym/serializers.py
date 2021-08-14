@@ -19,4 +19,4 @@ class OneGymSerializer(serializers.ModelSerializer):
 class AvailableDateTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AvailableDateTime
-        fields = ('id','time', 'taken')
+        fields = ('id','time', 'date','taken')

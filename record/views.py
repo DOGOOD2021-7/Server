@@ -7,12 +7,20 @@ from django.shortcuts import get_object_or_404
 from .serializers import *
 
 # Create your views here.
-class AddRecord(APIView): #기록 추가
+class Record(APIView): #기록 추가
     def post(self, request):
         user = get_user(request) #jwt에서 user읽기
         body=request.data
         Record.objects.create(dieter=user.dieter,comment=body["comment"],inbody=body["inbody"])
         return Response({"detail":"success"},status=status.HTTP_201_CREATED)
+    
+    def get(self,request): #특정 연,월에 대해 조회
+        month = request.query_params['month']
+        year = request.query_params['year']
+        records = Record.objects.filter(date__year=year,date__month=month)
+        serializer = RecordSerializer(records, many=True,context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class OneRecord(APIView):
     def get(self, request,pk): #특정 기록 조회
