@@ -16,6 +16,8 @@ class RegisterDetail(APIView):
         #print(user)
         body=request.data
         if body["type"]=="gym":
+            user.type="gym"
+            user.save()
             Gym.objects.create(
                 user=user,
                 address=body["address"],
@@ -28,7 +30,9 @@ class RegisterDetail(APIView):
                 price_desc=body["price_desc"],
             )
         else:
-            Gym.objects.create(
+            user.type="dieter"
+            user.save()
+            Dieter.objects.create(
                 user=user,
                 address=body["address"],
                 profile=body["profile"],
