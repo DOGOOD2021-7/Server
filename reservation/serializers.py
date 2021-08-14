@@ -10,7 +10,7 @@ class ReservationGymSerializer(serializers.ModelSerializer):
 class GymReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = ('id', 'state','gym','phone_num','reserved_date','client_name')
+        fields = ('id', 'state','gym','phone_num','reserved_date','client_name','created_at','updated_at')
 
     def to_representation(self, instance): #shop에서 필요한 정보만 표시
         response = super().to_representation(instance)

@@ -16,3 +16,5 @@ class Reservation(models.Model):
     gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
     dieter = models.ForeignKey(Dieter, on_delete=models.CASCADE)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
