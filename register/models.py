@@ -58,7 +58,6 @@ class CustomUser(AbstractUser):
 
 
 class Dieter(models.Model):
-    username = models.CharField(max_length=10)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     profile = models.TextField()
     address = models.TextField()
@@ -78,7 +77,7 @@ class Gym(models.Model):
     price_desc = models.TextField()
 
 
-class Coaching:
+class Coaching(models.Model):
     gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
     client = models.ForeignKey(Dieter, on_delete=models.CASCADE)
     client_name = models.CharField(max_length=10)
