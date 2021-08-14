@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser
-from coaching.models import *
+
 
 class CustomUserManager(BaseUserManager):
     """
@@ -50,7 +50,7 @@ class CustomUser(AbstractUser):
 
     spouse_name = models.CharField(blank=True, max_length=100)
     date_of_birth = models.DateField(blank=True, null=True)
-    
+    type = models.CharField(blank=True, null=True,max_length=100)
 
     def __str__(self):
         return self.email
@@ -73,5 +73,11 @@ class Gym(models.Model):
     profile1 = models.TextField()
     profile2 = models.TextField()
     profile3 = models.TextField()
-    clients = models.ManyToManyField(Dieter,related_name='coaches', through='Coaching')
+    clients = models.ManyToManyField(Dieter,related_name='coaches')
     price_desc = models.TextField()
+
+
+class Coaching:
+    gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
+    client = models.ForeignKey(Dieter, on_delete=models.CASCADE)
+    client_name = models.CharField(max_length=10)
