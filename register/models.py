@@ -53,3 +53,20 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Gym(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    gym_name = models.CharField(max_length=100)
+    address = models.TextField()
+    logo = models.ImageField()
+    website = models.URLField()
+    profile1 = models.ImageField()
+    profile2 = models.ImageField()
+    profile3 = models.ImageField()
+
+
+class Dieter(models.Model):
+    username = models.CharField(max_length=10)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    address = models.TextField()
