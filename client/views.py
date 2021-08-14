@@ -29,9 +29,7 @@ class ClientDetail(APIView):
         return Response(data = serializer.data, status=status.HTTP_200_OK)
 
 
-class AddClientRecord(APIView):
-
-     def post(self, request, pk):
+    def post(self, request, pk):
          body = request.data
          Record.objects.create(dieter_id=pk, inbody=body['inbody'], comment=body['comment'] )
 
