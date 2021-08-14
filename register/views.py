@@ -2,12 +2,23 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 import jwt
 from .models import *
+from rest_auth.views import LoginView
+from django.shortcuts import get_object_or_404
 
 def get_user(request):
     token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
     decoded = jwt.decode(token, '@v^+tcurenaeo=u0cuorgi0(8*9xalx7g2sz0np^u7j6@o&q_c')
     return CustomUser.objects.get(id=decoded['user_id'])
 
+#로그인할때 추가 정보(type) 주기 위해
+class CustomLoginView(LoginView):
+    def get_response(self):
+        orginal_response = super().get_response()
+        print(orginal_response.data['user']['pk'])
+        user = get_object_or_404(CustomUser,pk=orginal_response.data['user']['pk'])
+        mydata = {"user_type": user.type} #user type넣기
+        orginal_response.data.update(mydata)
+        return orginal_response
 
 # User의 세부정보받기
 class RegisterDetail(APIView):
