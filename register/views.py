@@ -4,6 +4,7 @@ import jwt
 from .models import *
 from rest_auth.views import LoginView
 from django.shortcuts import get_object_or_404
+import json
 
 def get_user(request):
     token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
@@ -25,7 +26,12 @@ class RegisterDetail(APIView):
     def post(self, request):
         user = get_user(request) #jwt에서 user읽기
         #print(user)
-        body=request.data
+        #body=request.data
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        body = body['content']
+        print(body)
+
         if body["type"]=="gym":
             user.type="gym"
             user.save()
