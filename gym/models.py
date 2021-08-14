@@ -2,7 +2,7 @@ from django.db import models
 from register.models import *
 
 
-class AvailableDateTime:
+class AvailableDateTime(models.Model):
     Time_CHOICES = (
         (9, '9 : 00'),
         (10, '10 : 00'),
