@@ -32,7 +32,7 @@ class ReservationTimeDetail(APIView):
         gym = get_object_or_404(Gym, pk=pk)
         date = request.query_params['date'] # requset parameter 가져오기
 
-        times = AvailableDateTime.filter(date = date)
+        times = AvailableDateTime.filter(date = date, gym=gym)
         data = AvailableDateTimeSerializer(times, many=True)
 
         return Response(data, status=status.HTTP_200_OK)
