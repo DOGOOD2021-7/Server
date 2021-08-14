@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from .serializers import *
 
 # Create your views here.
-class Record(APIView): #기록 추가
+class ManyRecord(APIView): #기록 추가
     def post(self, request):
         user = get_user(request) #jwt에서 user읽기
 
