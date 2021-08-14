@@ -8,9 +8,12 @@ class Reservation(models.Model):
         ('confirmed', '예약확정'),
         ('rejection', '예약취소')
     )
-    state = models.CharField(choices=STATE_CHOICES)
+
+    state = models.CharField(choices=STATE_CHOICES, default='inquiry')
     reason = models.TextField(null=True, blank=True)
     reserved_date = models.DateTimeField()
+    phone_num = models.TextField()
+    client_name = models.CharField(max_length=10)
     gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
     dieter = models.ForeignKey(Dieter, on_delete=models.CASCADE)
 
