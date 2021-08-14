@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -68,6 +69,14 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 SITE_ID = 1
 
 REST_USE_JWT = True
+
+JWT_AUTH = { 
+    'JWT_SECRET_KEY': '@v^+tcurenaeo=u0cuorgi0(8*9xalx7g2sz0np^u7j6@o&q_c',
+    'JWT_ALGORITHM': 'HS256', 
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7), 
+    'JWT_ALLOW_REFRESH': True, 
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
