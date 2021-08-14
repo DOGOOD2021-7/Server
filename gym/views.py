@@ -12,18 +12,18 @@ class GymList(APIView):
 
     def get(self, request):
         gyms = Gym.objects.all()
-        data = GymSerializer(gyms ,many=True, context={"request": request})
+        serializer = GymSerializer(gyms ,many=True, context={"request": request})
 
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class GymDetail(APIView):
 
     def get(self,request,pk):
         gym = get_object_or_404(Gym, pk=pk)
-        data = OneGymSerializer(gym, context={"request": request})
+        serializer = OneGymSerializer(gym, context={"request": request})
 
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ReservationTimeDetail(APIView):
@@ -32,9 +32,10 @@ class ReservationTimeDetail(APIView):
         gym = get_object_or_404(Gym, pk=pk)
         date = request.query_params['date'] # requset parameter 가져오기
 
+        gym.availableTimes.filter(date = date)
         times = AvailableDateTime.filter(date = date, gym=gym)
-        data = AvailableDateTimeSerializer(times, many=True)
+        serializer = AvailableDateTimeSerializer(times, many=True)
 
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
