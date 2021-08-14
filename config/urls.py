@@ -7,5 +7,9 @@ urlpatterns = [
     path('register/', include('register.urls')),
     path('gyms/', include('gym.urls')),
     path('reservations/', include('reservation.urls')),
+<<<<<<< HEAD
     path('records/',include('record.urls')),
+=======
+    path('clients/', include('client.urls')),
+>>>>>>> client
 ]

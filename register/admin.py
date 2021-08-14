@@ -9,8 +9,8 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 @admin.register(Dieter)
 class DieterAdmin(admin.ModelAdmin):
-    list_display = ('username','user','profile','address',)
-    list_display_links = ('username','user','profile','address',)
+    list_display = ('user','profile','address',)
+    list_display_links = ('user','profile','address',)
 
 @admin.register(Gym)
 class GymAdmin(admin.ModelAdmin):

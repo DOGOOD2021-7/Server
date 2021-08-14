@@ -78,7 +78,7 @@ class Gym(models.Model):
     price_desc = models.TextField()
 
 
-class Coaching:
+class Coaching(models.Model):
     gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
     client = models.ForeignKey(Dieter, on_delete=models.CASCADE)
     client_name = models.CharField(max_length=10)

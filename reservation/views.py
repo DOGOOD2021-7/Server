@@ -5,6 +5,7 @@ from rest_framework import status
 from .serializers import *
 from .models import *
 from register.views import *
+from register.models import *
 import json
 import datetime
 
@@ -49,13 +50,17 @@ class AddReservation(APIView):
 class ReservationsDetail(APIView):
 
     def patch(self,request,pk):
+        gym = get_user(request).gym
         reservation = get_object_or_404(Reservation, pk=pk)
-        state = reservation.state = json.loads(request.body.decode('utf-8')).get('state')
-        reason = reservation.state = json.loads(request.body.decode('utf-8')).get('reason')
+        state = json.loads(request.body.decode('utf-8')).get('state')
+        reason = json.loads(request.body.decode('utf-8')).get('reason')
         msg = {"detail" : "success"}
 
         if state == 'rejection':
             reservation.reason = reason
+        else:
+            Coaching.objects.create(gym=gym, client= reservation.dieter, client_name=reservation.client_name )
+
         reservation.state =state
         reservation.save()
 
