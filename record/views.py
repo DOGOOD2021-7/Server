@@ -17,7 +17,13 @@ class Record(APIView): #기록 추가
     def get(self,request): #특정 연,월에 대해 조회
         month = request.query_params['month']
         year = request.query_params['year']
-        records = Record.objects.filter(date__year=year,date__month=month)
+        user = get_user(request) #jwt에서 user읽기
+
+        if user.type=="gym": #gym이면
+            msg = {"detail": "gym can not access"}
+            return Response(data=msg, status=status.HTTP_400_BAD_REQUEST)
+
+        records = Record.objects.filter(dieter=user.dieter,date__year=year,date__month=month)
         serializer = RecordSerializer(records, many=True,context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
