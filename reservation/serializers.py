@@ -17,7 +17,7 @@ class GymReservationSerializer(serializers.ModelSerializer):
         response['gym'] = ReservationGymSerializer(instance.shop, context={"request": self.context['request']}).data
         return response
 
-class DietReservationSerializer(serializers.ModelSerializer):
+class DieterReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = ('id', 'state','gym','phone_num','reserved_date', 'reason')
