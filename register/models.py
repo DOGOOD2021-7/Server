@@ -73,3 +73,4 @@ class Gym(models.Model):
     profile2 = models.ImageField()
     profile3 = models.ImageField()
     clients = models.ManyToManyField(Dieter,related_name='coaches')
+    price_desc = models.ImageField()
