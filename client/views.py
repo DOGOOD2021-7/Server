@@ -22,7 +22,7 @@ class ClientList(APIView):
 class ClientDetail(APIView):
 
     def get(self, request, pk):
-        client = get_object_or_404(Dieter, pi=pk)
+        client = get_object_or_404(Dieter, pk=pk)
         records = Record.objects.filter(dieter=client)
         serializer = ClientRecordSerializer(records, many=True, context={"request": request})
 
